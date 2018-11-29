@@ -8,6 +8,7 @@ import db.DB;
 
 
 import java.io.*;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
@@ -68,9 +69,6 @@ public class DBServiceTest {
 
 
         Assert.assertTrue(propertiesConnection.getDbuser().equals("root"));
-
-
-
-
     }
+
 }

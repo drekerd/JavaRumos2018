@@ -16,9 +16,11 @@ public class DB {
         Properties prop = new Properties();
         FileInputStream file;
 
+        PropertiesConnection propertiesConnection = new PropertiesConnection();
+
 
         try{
-            System.out.println(new File("db.properties").getAbsoluteFile());
+           // System.out.println(new File("db.properties").getAbsoluteFile());
             file = new FileInputStream("src/main/resources/db/db.properties");
 
             if (file != null) {
@@ -29,9 +31,9 @@ public class DB {
 
             prop.load(file);
 
-            propertiesConnection().setDbpasswrod(prop.getProperty("dbuser"));
-            propertiesConnection().setDbpasswrod(prop.getProperty("dbpassword"));
-            propertiesConnection().setDbpasswrod(prop.getProperty("dbase"));
+            propertiesConnection.setDbuser(prop.getProperty("dbuser"));
+            propertiesConnection.setDbpasswrod(prop.getProperty("dbpassword"));
+            propertiesConnection.setDbase(prop.getProperty("dbase"));
 
         }
         catch(IOException e)
@@ -39,7 +41,7 @@ public class DB {
             e.printStackTrace();
         }
 
-        return propertiesConnection();
+        return propertiesConnection;
     }
 
     private static DB db;
@@ -56,7 +58,7 @@ public class DB {
 
     public Connection connection() throws SQLException {
 
-        String jdbc = "jdbc:mysql://localhost/employees?user=root&password=1909mm81";
+        String jdbc = "jdbc:mysql://localhost/"+propertiesConnection().getDbase()+"?user="+propertiesConnection().getDbuser()+"&password="+propertiesConnection().getDbpasswrod();
         Connection connection = DriverManager.getConnection(jdbc);
         return connection;
     }
