@@ -3,6 +3,7 @@ package service;
 import db.DB;
 import dto.Employee;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -10,7 +11,7 @@ import java.time.LocalDate;
 
 public class DBService {
 
-    public Employee insertEmployee(Employee toSave) throws ClassNotFoundException, SQLException {
+    public Employee insertEmployee(Employee toSave) throws ClassNotFoundException, SQLException, IOException {
 
         Statement statement = DB.INSTANCE().connection().createStatement();
 
