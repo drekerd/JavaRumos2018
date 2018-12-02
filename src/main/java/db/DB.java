@@ -34,6 +34,8 @@ public class DB {
             propertiesConnection.setDbuser(prop.getProperty("dbuser"));
             propertiesConnection.setDbpasswrod(prop.getProperty("dbpassword"));
             propertiesConnection.setDbase(prop.getProperty("dbase"));
+            propertiesConnection.setJdbc(prop.getProperty("jdbcDriver"));
+
 
         }
         catch(IOException e)
@@ -46,7 +48,7 @@ public class DB {
 
     private static DB db;
 
-    private DB() throws FileNotFoundException, IOException { };
+    public DB() throws FileNotFoundException, IOException { };
 
     public static DB INSTANCE() throws ClassNotFoundException, IOException {
         if (db == null) {
@@ -58,7 +60,8 @@ public class DB {
 
     public Connection connection() throws SQLException {
 
-        String jdbc = "jdbc:mysql://localhost/"+propertiesConnection().getDbase()+"?user="+propertiesConnection().getDbuser()+"&password="+propertiesConnection().getDbpasswrod();
+        //String jdbc = "jdbc:mysql://localhost/"+propertiesConnection().getDbase()+"?user="+propertiesConnection().getDbuser()+"&password="+propertiesConnection().getDbpasswrod();
+        String jdbc = propertiesConnection().getJdbc();
         Connection connection = DriverManager.getConnection(jdbc);
         return connection;
     }
